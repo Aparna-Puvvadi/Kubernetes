@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openmrs-deploy
+spec:
+  minReadySeconds: 10
+  replicas: 3
+  selector:
+    matchLabels:
+      app: openmrs
+      version: "2.6.0"
+  strategy:
+    rollingUpdate:
+      maxSurge: 35%
+      maxUnavailable: 30%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: openmrs
+        version: "2.6.0"
+    spec:
+      containers:
+        - name: openmrs
+          image: openmrs/openmrs-reference-application-distro:2.6
+          ports:
+            - containerPort: 8080
+              protocol: TCP
