@@ -6,7 +6,6 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: managed-premium
   resources:
     requests:
       storage: 1Gi
@@ -47,4 +46,4 @@ spec:
       volumes:
         - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: ap-azure-managed-disk
+            claimName: mysql-pv-claim
